@@ -11,7 +11,7 @@ import Login from "./components/login/Login"
  import Shopkeeper_homepage from './components/shopkeeper/Shopkeeper_homepage';
  import Shopkeeper_login from './components/shopkeeper/Shopkeeper_login';
  import Table from './components/shopkeeper/Table';
- import View_order from './components/shopkeeper/VIew_order';
+ import View_order from './components/shopkeeper/View_order';
  import Shop_order from './components/shopkeeper/Shop_order';
 
 

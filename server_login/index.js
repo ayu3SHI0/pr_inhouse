@@ -50,9 +50,7 @@ res.send({ message: "login successfull", user: user });
 } else {
 res.send({ message: "password do not match" });
 }
-} else {
-res.send({ message: "user not registered" });
-}
+ } 
 });
 });
 

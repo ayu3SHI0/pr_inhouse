@@ -36,6 +36,7 @@ function Table() {
               <th>PRODUCT ID </th>
               <th>PNAME </th>
               <th>PRICE </th>
+              <th>QUANTITY </th>
               {products?.map((current) =>
                 editState === current.productId ? (
                   <EditItem current={current} datas={datas} setData={setData} />
@@ -46,13 +47,6 @@ function Table() {
                     <td>{current.productPrice}</td>
                     <td>{current.productQuantity}</td>
                     <td>
-                      <button
-                        className="edit"
-                        onClick={() => handleEdit(current.productId)}
-                      >
-                        {" "}
-                        Edit
-                      </button>
                       <button
                         className="delete"
                         onClick={() => handleDelete(current.id)}

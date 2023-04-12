@@ -13,14 +13,21 @@ import Login from "./components/login/Login"
  import Table from './components/shopkeeper/Table';
  import View_order from './components/shopkeeper/View_order';
  import Shop_order from './components/shopkeeper/Shop_order';
-
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserContextProvider from './UserContext'
 
 
 
+// export const UserContext = createContext({
+//   smartID: '',
+//   password: '',
+//   updateSmartID: () => {},
+//   updatePassword: () => {},
+// });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  // <UserContext.Provider value={{ smartID, password,updateSmartID, updatePassword}}>
+  <UserContextProvider>
   <BrowserRouter>
     <Routes>
     <Route path='/' element={<Main_login />}/>
@@ -37,4 +44,5 @@ root.render(
       <Route path='/Shop_order' element={<Shop_order/>}/>
     </Routes>
   </BrowserRouter>
-);
+  </UserContextProvider>
+  );

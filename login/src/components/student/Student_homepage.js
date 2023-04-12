@@ -40,7 +40,6 @@ function Student_homepage() {
 
           <button onClick={gotoProfile}>My Profile</button>
           <button onClick={gotoOrders}>My Orders</button>
-
         </div>
 
       {/* CONTAINER FRO THE REST  */}

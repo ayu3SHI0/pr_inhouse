@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import React from "react";
 import './billgenerator.css';
 import '../../headerForAll.css';
 import logo2 from '../images/logo2.png';
 import bv_logo from '../images/bv_logo.jpg';
-
-// import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 function Stationerybill() {
-
+  
   // Define the list of items and cart as empty arrays
   const [items, setItems] = useState([
     { id: "p01", name: "Pen", price: 10 },
@@ -17,6 +16,8 @@ function Stationerybill() {
     { id: "p04", name: "Eraser", price: 5 },
     { id: "p05", name: "Scale", price: 10 }
   ]);
+  const { user } = useContext(UserContext);
+  console.log("user in bill",user)
 
   const [cart, setCart] = useState([]);
 

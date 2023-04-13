@@ -6,16 +6,16 @@ import bv_logo from "../images/bv_logo.jpg";
 import "./table.css";
 import axios from "axios";
 
-function Table() {
+function Table_pharmacy() {
   const [datas, setData] = useState(Data);
   const [editState, setEditState] = useState(-1);
-  const [products, setProducts]= useState([]);
+  const [pproducts, setpProducts]= useState([]);
   useEffect(() => {
-    console.log("product in use effect",products)
-   axios.get("http://localhost:9002/api/all-products")
-   .then((res) => setProducts(res.data))
+    console.log("product in use effect",pproducts)
+   axios.get("http://localhost:9002/api/all-pproducts")
+   .then((res) => setpProducts(res.data))
   },[])
-  console.log("out",products)
+  console.log("out",pproducts)
 
   return (
     <>
@@ -33,19 +33,21 @@ function Table() {
           <AddItem setData={setData} />
           <form>
             <table className="td1" border="2">
+            <tbody>
+
               <th>PRODUCT ID </th>
               <th>PNAME </th>
               <th>PRICE </th>
               <th>QUANTITY </th>
-              {products?.map((current) =>
-                editState === current.productId ? (
+              {pproducts?.map((current) =>
+                editState === current.pproductId ? (
                   <EditItem current={current} datas={datas} setData={setData} />
                 ) : (
-                  <tr key={current.productId}>
-                    <td>{current.productId}</td>
-                    <td>{current.productName}</td>
-                    <td>{current.productPrice}</td>
-                    <td>{current.productQuantity}</td>
+                  <tr key={current.pproductId}>
+                    <td>{current.pproductId}</td>
+                    <td>{current.pproductName}</td>
+                    <td>{current.pproductPrice}</td>
+                    <td>{current.pproductQuantity}</td>
                     <td>
                       <button
                         className="delete"
@@ -57,28 +59,27 @@ function Table() {
                   </tr>
                 )
               )}
+              </tbody>
               </table>
           </form>
         </div>
       </div>
     </>
   );
- 
+  
   function handleEdit(id) {
     setEditState(id);
   }
   function handleDelete(id) {
     console.log(id)
-   axios.delete(`http://localhost:9002/api/products/${id}`)
+   axios.delete(`http://localhost:9002/api/pproducts/${id}`)
+  
   }
 }
 function EditItem({ current, datas, setData }) {
   function handlePid(event) {
     const pid = event.target.value;
-    const regex = /^p\d+$/;
-    if (regex.test(pid)) {
-      setData(pid);
-    }
+    
     const updatedData = datas.map((d) =>
       d.id === current.id ? { ...d, pid: pid } : d
     );
@@ -93,7 +94,7 @@ function EditItem({ current, datas, setData }) {
   }
   function handleUpdate(id,name,quantity,price) {
     console.log("update",id)
-    axios.put(`http://localhost:9002/api/products/${id}`,{
+    axios.put(`http://localhost:9002/api/pproducts/${id}`,{
       name,
       quantity,
       price,
@@ -120,6 +121,8 @@ function EditItem({ current, datas, setData }) {
     setData(updatedData);
   }
   return (
+    <table>
+      <tbody>
     <tr>
       <td>
         <input
@@ -166,6 +169,8 @@ function EditItem({ current, datas, setData }) {
       <button type="submit" onClick={() => handleUpdate(current.pid,current.name,current.qty,current.price)}>Update</button>
       </td>
     </tr>
+    </tbody>
+    </table>
   );
 }
 function AddItem({ setData }) {
@@ -192,7 +197,7 @@ function AddItem({ setData }) {
     priceRef.current.value = "";
     qtyRef.current.value = "";
   }
-  const [product, setProduct] = useState({
+  const [pproduct, setpProduct] = useState({
     id: "",
     name: "",
     quantity: "",
@@ -200,13 +205,13 @@ function AddItem({ setData }) {
   });
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    setpProduct({ ...pproduct, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("product", product);
+
     axios
-      .post("http://localhost:9002/api/products", product)
+      .post("http://localhost:9002/api/products", pproduct)
       .then((res) => {
         console.log(res.data);
       })
@@ -222,7 +227,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="id"
-            value={product.id}
+            value={pproduct.id}
             onChange={handleChange}
           />
         </label>
@@ -231,7 +236,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="name"
-            value={product.name}
+            value={pproduct.name}
             onChange={handleChange}
           />
         </label>
@@ -240,7 +245,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="quantity"
-            value={product.quantity}
+            value={pproduct.quantity}
             onChange={handleChange}
           />
         </label>
@@ -249,7 +254,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="price"
-            value={product.price}
+            value={pproduct.price}
             onChange={handleChange}
           />
         </label>
@@ -261,4 +266,4 @@ function AddItem({ setData }) {
     );
   }
   
-  export default Table;
+  export default Table_pharmacy;

@@ -15,7 +15,11 @@ import Login from "./components/login/Login"
  import Shop_order from './components/shopkeeper/Shop_order';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserContextProvider from './UserContext'
-
+import Mainshopkeeper from './components/shopkeeper/Mainshopkeeper';
+import Pharmacy_homepage from './components/shopkeeper/Pharmacy_homepage';
+import Stationery_homepage from './components/shopkeeper/Stationery_homepage';
+import Table_pharmacy from './components/shopkeeper/Table_pharmacy';
+import Table_stationery from './components/shopkeeper/Table_stationery';
 
 
 // export const UserContext = createContext({
@@ -42,6 +46,11 @@ root.render(
       <Route path='/Table' element={<Table/>}/>
       <Route path='/View_order' element={<View_order/>}/>
       <Route path='/Shop_order' element={<Shop_order/>}/>
+      <Route path='/Mainshopkeeper' element={<Mainshopkeeper/>}/>
+      <Route path='/Pharmacy_homepage' element={<Pharmacy_homepage/>}/>
+      <Route path='/Stationery_homepage' element={<Stationery_homepage/>}/>
+      <Route path='/Table_pharmacy' element={<Table_pharmacy/>}/>
+      <Route path='/Table_stationery' element={<Table_stationery/>}/>
     </Routes>
   </BrowserRouter>
   </UserContextProvider>

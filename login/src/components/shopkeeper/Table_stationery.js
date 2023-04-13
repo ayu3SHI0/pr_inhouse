@@ -6,16 +6,16 @@ import bv_logo from "../images/bv_logo.jpg";
 import "./table.css";
 import axios from "axios";
 
-function Table() {
+function Table_stationery() {
   const [datas, setData] = useState(Data);
   const [editState, setEditState] = useState(-1);
-  const [products, setProducts]= useState([]);
+  const [sproducts, setsProducts]= useState([]);
   useEffect(() => {
-    console.log("product in use effect",products)
-   axios.get("http://localhost:9002/api/all-products")
-   .then((res) => setProducts(res.data))
+    console.log("product in use effect",sproducts)
+   axios.get("http://localhost:9002/api/all-sproducts")
+   .then((res) => setsProducts(res.data))
   },[])
-  console.log("out",products)
+  console.log("out",sproducts)
 
   return (
     <>
@@ -37,15 +37,15 @@ function Table() {
               <th>PNAME </th>
               <th>PRICE </th>
               <th>QUANTITY </th>
-              {products?.map((current) =>
-                editState === current.productId ? (
+              {sproducts?.map((current) =>
+                editState === current.sproductId ? (
                   <EditItem current={current} datas={datas} setData={setData} />
                 ) : (
-                  <tr key={current.productId}>
-                    <td>{current.productId}</td>
-                    <td>{current.productName}</td>
-                    <td>{current.productPrice}</td>
-                    <td>{current.productQuantity}</td>
+                  <tr key={current.sproductId}>
+                    <td>{current.sproductId}</td>
+                    <td>{current.sproductName}</td>
+                    <td>{current.sproductPrice}</td>
+                    <td>{current.sproductQuantity}</td>
                     <td>
                       <button
                         className="delete"
@@ -63,13 +63,16 @@ function Table() {
       </div>
     </>
   );
- 
+  // function handleUpdate(id) {
+  //  console.log("update",id)
+  // //  axios.put(`http://localhost:9002/api/products/${id}`)
+  // }
   function handleEdit(id) {
     setEditState(id);
   }
   function handleDelete(id) {
     console.log(id)
-   axios.delete(`http://localhost:9002/api/products/${id}`)
+   axios.delete(`http://localhost:9002/api/sproducts/${id}`)
   }
 }
 function EditItem({ current, datas, setData }) {
@@ -192,7 +195,7 @@ function AddItem({ setData }) {
     priceRef.current.value = "";
     qtyRef.current.value = "";
   }
-  const [product, setProduct] = useState({
+  const [sproduct, setsProduct] = useState({
     id: "",
     name: "",
     quantity: "",
@@ -200,13 +203,13 @@ function AddItem({ setData }) {
   });
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    setsProduct({ ...sproduct, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("product", product);
     axios
-      .post("http://localhost:9002/api/products", product)
+      .post("http://localhost:9002/api/products", sproduct)
       .then((res) => {
         console.log(res.data);
       })
@@ -222,7 +225,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="id"
-            value={product.id}
+            value={sproduct.id}
             onChange={handleChange}
           />
         </label>
@@ -231,7 +234,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="name"
-            value={product.name}
+            value={sproduct.name}
             onChange={handleChange}
           />
         </label>
@@ -240,7 +243,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="quantity"
-            value={product.quantity}
+            value={sproduct.quantity}
             onChange={handleChange}
           />
         </label>
@@ -249,7 +252,7 @@ function AddItem({ setData }) {
           <input
             type="text"
             name="price"
-            value={product.price}
+            value={sproduct.price}
             onChange={handleChange}
           />
         </label>
@@ -261,4 +264,4 @@ function AddItem({ setData }) {
     );
   }
   
-  export default Table;
+  export default Table_stationery;
